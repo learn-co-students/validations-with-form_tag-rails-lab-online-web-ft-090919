@@ -1,4 +1,5 @@
 class AuthorsController < ApplicationController
+
   def show
     @author = Author.find(params[:id])
   end
@@ -7,10 +8,22 @@ class AuthorsController < ApplicationController
     @author = Author.new
   end
 
-  def create
-    @author = Author.create(author_params)
+  def edit
+  end
 
+  def create
+    @author = Author.new(author_params)
+  if @author.valid?
+    @author.save
     redirect_to author_path(@author)
+  else
+    # re-render the :new template WITHOUT throwing away the invalid @person
+    render :new
+  end
+end
+
+  def update
+
   end
 
   private
