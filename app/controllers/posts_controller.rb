@@ -8,11 +8,12 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find(params[:id])
-
-    @post.update(post_params)
-
-    redirect_to post_path(@post)
+    @post = Post.find(params[:id]) #find what you wanna change 
+    if @post.update(post_params) # if what you wanna change is the change CHANGE IT 
+      redirect_to post_path(@post) #send them back to where they were before with there new update 
+    else
+      render :edit #send them back to the edit page without there changes 
+    end
   end
 
   private
